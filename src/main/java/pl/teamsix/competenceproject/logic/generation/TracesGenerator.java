@@ -1,15 +1,15 @@
 package pl.teamsix.competenceproject.logic.generation;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.math3.distribution.ExponentialDistribution;
 import org.springframework.stereotype.Service;
 import pl.teamsix.competenceproject.domain.entity.Hotspot;
 import pl.teamsix.competenceproject.domain.entity.Trace;
 import pl.teamsix.competenceproject.domain.entity.User;
 import pl.teamsix.competenceproject.domain.service.trace.TraceService;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TracesGenerator {
@@ -25,8 +25,8 @@ public class TracesGenerator {
         this.traceService = traceService;
     }
 
-    public void generate(List<User> users, List<Hotspot> hotspots, Date startTime, double durationInHours,
-            double avgMovementsPerHour) {
+    public void generate(List<User> users, List<Hotspot> hotspots, Date startTime,
+                         double durationInHours, double avgMovementsPerHour) {
         long duration = (long) (durationInHours * MILLISECONDS_IN_HOUR);
         double lambda = avgMovementsPerHour / MILLISECONDS_IN_HOUR;
         final ExponentialDistribution exitDistribution = new ExponentialDistribution(1.0 / lambda);
@@ -39,8 +39,8 @@ public class TracesGenerator {
         for (User user : users) {
             double time = startTime.getTime();
             while (time < startTime.getTime() + duration) {
-                double entryTime =
-                        time + entryDistributions[(int) (((long) time) / MILLISECONDS_IN_HOUR % 24)].sample();
+                double entryTime = time
+                        + entryDistributions[(int) (((long) time) / MILLISECONDS_IN_HOUR % 24)].sample();
                 double exitTime = entryTime + exitDistribution.sample();
                 int nextHotspot;
                 do {

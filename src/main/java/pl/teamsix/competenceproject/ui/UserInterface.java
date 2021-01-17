@@ -19,9 +19,7 @@ import pl.teamsix.competenceproject.logic.anonymization.DataAnonymizator;
 import pl.teamsix.competenceproject.logic.generation.HotspotsGenerator;
 import pl.teamsix.competenceproject.logic.generation.TracesGenerator;
 import pl.teamsix.competenceproject.logic.generation.UsersGenerator;
-import scala.Int;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -256,7 +254,7 @@ public class UserInterface {
             }
 
             case "16": {
-                Map<String,Integer> results = this.dataAnalysis.mostPopularNextHotspot(jsc);
+                Map<String, Integer> results = this.dataAnalysis.mostPopularNextHotspot(jsc);
                 printMostPopularNextHotspot(results);
                 break;
             }
@@ -264,7 +262,7 @@ public class UserInterface {
             case "17": {
                 final int numberOfGroups = requestNumberOfGroups();
                 final int numberOfRows = requestNumberOfRows();
-                Dataset<Row> result = this.dataAnalysis.clusterByUsers(numberOfGroups,jsc);
+                Dataset<Row> result = this.dataAnalysis.clusterByUsers(numberOfGroups, jsc);
                 result.show(numberOfRows, false);
                 break;
             }
@@ -272,7 +270,7 @@ public class UserInterface {
             case "18": {
                 final int numberOfGroups = requestNumberOfGroups();
                 final int numberOfRows = requestNumberOfRows();
-                Dataset<Row> result = this.dataAnalysis.clusterByTimeSpent(numberOfGroups,jsc);
+                Dataset<Row> result = this.dataAnalysis.clusterByTimeSpent(numberOfGroups, jsc);
                 result.show(numberOfRows, false);
                 break;
             }
@@ -280,7 +278,8 @@ public class UserInterface {
             case "19": {
                 final int numberOfGroups = requestNumberOfGroups();
                 final int numberOfRows = requestNumberOfRows();
-                Dataset<Row> result = this.dataAnalysis.clusterByUsersInWeekDay(numberOfGroups,jsc);
+                Dataset<Row> result = this.dataAnalysis.clusterByUsersInWeekDay(numberOfGroups,
+                        jsc);
                 result.show(numberOfRows, false);
                 break;
             }
@@ -288,7 +287,7 @@ public class UserInterface {
             case "20": {
                 final int numberOfGroups = requestNumberOfGroups();
                 final int numberOfRows = requestNumberOfRows();
-                Dataset<Row> result = this.dataAnalysis.clusterByDayTime(numberOfGroups,jsc);
+                Dataset<Row> result = this.dataAnalysis.clusterByDayTime(numberOfGroups, jsc);
                 result.show(numberOfRows, false);
                 break;
             }
@@ -398,9 +397,9 @@ public class UserInterface {
         }
     }
 
-    private void printMostPopularNextHotspot(Map<String,Integer> mostPopularNextHotspots){
+    private void printMostPopularNextHotspot(Map<String, Integer> mostPopularNextHotspots) {
         String format = "%-60s%-25s%n";
-        System.out.printf(format, "hotspot name","num of traces");
+        System.out.printf(format, "hotspot name", "num of traces");
         for (Map.Entry<String, Integer> entry : mostPopularNextHotspots.entrySet()) {
             System.out.printf(format, entry.getKey(), entry.getValue());
         }
